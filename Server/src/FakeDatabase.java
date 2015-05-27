@@ -1,3 +1,6 @@
+/**
+ * Created by Lotus on 2015-05-20.
+ */
 import java.lang.Boolean;import java.lang.String;import java.util.*;import java.util.HashMap;import java.util.Iterator;import java.util.LinkedList;import java.util.List;import java.util.Map;
 
 /**
@@ -7,7 +10,13 @@ public class FakeDatabase {
     private Map<String, String> passwords = new HashMap<String, String>();
     private Map<String, List<String>> friends = new HashMap<String, List<String>>();
     private List<Message> wiad = new LinkedList<Message>();
-    Boolean IsCorrect(String login, String password){
+
+
+    public void open() {
+
+    }
+
+    public Boolean isCorrect(String login, String password){
         String haslo = passwords.get(login);
         if( haslo != null)
         {
@@ -18,7 +27,7 @@ public class FakeDatabase {
         }
         return false;
     }
-    Boolean Register(String login, String password){
+    public Boolean register(String login, String password){
 
         if(passwords.containsKey(login) == true){
             return false;
@@ -29,10 +38,10 @@ public class FakeDatabase {
             return true;
         }
     }
-    void SaveMessage(Message msg){
+    public void saveMessage(Message msg){
         wiad.add(msg);
     }
-    List<Message> GetMessage(String nick){
+    public List<Message> getMessage(String nick){
         Iterator<Message> i = wiad.iterator();
         List<Message> wynik = new LinkedList<Message>();
         while(i.hasNext()){
@@ -46,14 +55,14 @@ public class FakeDatabase {
         }
         return wynik;
     }
-    List<String> getFriends(String login){
+    public List<String> getFriends(String login){
         return friends.get(login);
     }
-    void addFriend(String login, String login2){
+    public void addFriend(String login, String login2){
         friends.get(login).add(login2);
 
     }
-    void removeFriend(String login, String login2){
+    public void removeFriend(String login, String login2){
         friends.get(login).remove(login2);
     }
 }

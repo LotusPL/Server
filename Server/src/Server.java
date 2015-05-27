@@ -15,8 +15,10 @@ public class Server implements Runnable{
         new Server().run();
     }
     Answer ans;
-    FakeDatabase FDB;
+    Database DB = new RealDatabase();
     public void run(){
+        DB.open();
+
         ans = new Answer();
         ans.serv = this;
         new Thread(ans).start();
@@ -44,6 +46,7 @@ public class Server implements Runnable{
                             client.ch = socketchannel;
                             client.serv = this;
                             client.scan = new Scanner(socketchannel);
+                            client.fdb = DB;
 
                             socketchannel.configureBlocking(false);
                             socketchannel.register(selector,SelectionKey.OP_READ,client);
@@ -52,7 +55,7 @@ public class Server implements Runnable{
                         }
                         if (key.isReadable()){
                             Client client = (Client)key.attachment();
-                            client.Read();
+                            client.read();
                         }
                     }
 

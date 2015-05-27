@@ -17,11 +17,11 @@ public class Answer implements Runnable {
                 String[] part = text.split("\\s");
                 for(Client s : serv.clients) {
                     if(part[0].equals(s.nick)) {
-                        s.Receive(text.substring(part[0].length() + 1));
+                        s.receive(text.substring(part[0].length() + 1));
                     }
                 }
             }catch (InterruptedException e) {
-                e.printStackTrace();
+                //e.printStackTrace();
             }
             System.out.println("> " + text);
         }
